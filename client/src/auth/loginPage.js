@@ -9,6 +9,12 @@ function LoginPage() {
 
   const handleSignIn = async () => {
     try {
+      if (!email) {
+        alert("아이디를 입력해 주세요");
+        return false;
+      } else if (!password) {
+        alert("비밀번호를 입력해 주세요");
+      }
       const response = await axios.post("http://localhost:3000/auth/login", {
         email,
         password,

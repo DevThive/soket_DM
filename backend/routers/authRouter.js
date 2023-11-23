@@ -62,7 +62,7 @@ authRouter.post("/signup", validationCheck, async (req, res) => {
   }
 
   // 보안을 위해 비밀번호는 평문(Plain Text)으로 저장하지 않고 Hash 된 값을 저장합니다
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = bcrypt.hash(password, 10);
 
   try {
     const user = await User.create({
@@ -125,7 +125,7 @@ authRouter.post("/login", async (req, res) => {
   }
 
   // 비밀번호가 틀린 경우
-  const isMatch = await bcrypt.compare(password, existUser.password);
+  const isMatch = bcrypt.compare(password, existUser.password);
   if (!isMatch) {
     return res
       .status(400)
